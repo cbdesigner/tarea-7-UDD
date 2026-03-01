@@ -1,0 +1,21 @@
+import { useContext } from 'react';
+import { Navigate } from 'react-router-dom';
+import UserContext from '../context/User/UserContext';
+
+const Auth = ({ children }) => {
+  const { isAuthenticated, loading } = useContext(UserContext);
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center min-h-screen">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900"></div>
+      </div>
+    );
+  }
+
+  if (isAuthenticated) return <Navigate to="/" />;
+
+  return children;
+};
+
+export default Auth;
